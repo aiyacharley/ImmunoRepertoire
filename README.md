@@ -17,9 +17,23 @@ IgBLAST was developed at NCBI to facilitate analysis of immunoglobulin variable 
 
 You can get it from [Standalone IgBLAST](ftp://ftp.ncbi.nih.gov/blast/executables/igblast/release/)
 
-Additionally, you should down the file *edit_imgt_file.pl*, director *internal_data, optional_file*.
+Additionally, you should down the file ***edit_imgt_file.pl***, director ***internal_data, optional_file***.
 
 
 ### 3.IMGT Germline sequence
 
-This project, we get Immuno Germline sequence F+ORF+in-frame P sections from [http://www.imgt.org/vquest/refseqh.html], and makes it standardized by edit_imgt_file.pl
+This project, we get Immuno Germline sequence F+ORF+in-frame P sections from [IMGT](http://www.imgt.org/vquest/refseqh.html), and makes it standardized by **edit_imgt_file.pl**.
+
+## Pipeline
+
+### Merge paired-end fastq and change ID
+
+python MergeSplit.py /path/to/fastq
+
+### IgBLAST run wrap
+
+sh IgBLAST4HumanBCR.sh in.fasta
+
+### Parse IgBLAST result
+
+python ParseIgBLAST.py -f in.fasta -i igblast_result -o outname

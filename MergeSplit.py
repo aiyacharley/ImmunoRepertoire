@@ -106,6 +106,6 @@ def main():
 	process_sample(data_fold)
 
 if __name__ == '__main__':
-	data_fold = os.getcwd()  ### data fold path , /path/to/data/
+	data_fold = sys.argv[1]  ### data fold path , /path/to/data/
 	main()
 	print "2.0-Merge-Split-IgBLAST.py done !!! "

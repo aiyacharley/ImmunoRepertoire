@@ -24,6 +24,8 @@ Additionally, you should down the file ***edit_imgt_file.pl***, director ***inte
 
 This project, we get Immuno Germline sequence F+ORF+in-frame P sections from [IMGT](http://www.imgt.org/vquest/refseqh.html), and makes it standardized by **edit_imgt_file.pl**.
 
+Refer to python3 module *changeo*
+
 ## Pipeline
 
 ### Merge paired-end fastq and change ID

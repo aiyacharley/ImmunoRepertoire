@@ -23,10 +23,11 @@ def main():
 			myid = rec.strip().split(" ")[2]
 			vnum, dnum, jnum = 0,0,0
 		elif rec.startswith("IG"):
-			if rec.startswith("IGH"):
-				recom = rec.strip().split("\t")
-			else:
-				recom = [rec.strip().split("\t")[0],"N/A"]+rec.strip().split("\t")[1:]
+			info = rec.strip().split("\t")
+			if len(info)==8:
+				recom = info
+			elif len(info)==7:
+				recom = [info[0],"N/A"]+info[1:]
 		elif rec.startswith("CDR3\t"):
 			cdr3 = rec.strip().split("\t")
 		elif rec.startswith("V\t") and vnum==0:

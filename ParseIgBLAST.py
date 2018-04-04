@@ -3,6 +3,24 @@ import os,sys,csv
 from Bio import SeqIO
 import argparse
 
+def get_leader(seq,Vinfo):
+	if int(Vinfo[10]) == 1:
+		q_s = int(Vinfo[8])
+		myseq = seq[(q_s-1)%3:q_s-1]
+		atg_mat = re.finditer(r'(ATG)',myseq)
+		start_pos = 0
+		for hit in atg_mat:
+			if hit.group(1):
+				get_leader_len = (q_s-1) - hit.span(1)[0]
+				if hit.span(1)[0]%3 == 0 and get_leader_len >= 45:
+					start_pos = hit.span(1)[0]
+		if start_pos != 0:
+			leader_other_seq = myseq[start_pos:]
+			return leader_other_seq
+		else:
+			return "NNNNNNNNNN"
+	else:
+		return "NNNNNNNNNN"
 def main():
 	fasta_dict = SeqIO.index(infasta,'fasta')
 	inf1 = open(infile,'rU')
@@ -15,10 +33,11 @@ def main():
 				if len(Vinfo)>0 and len(Jinfo)>0:
 					variable_seq = str(myseq1.seq[int(Vinfo[8])-1:int(Jinfo[9])])
 					V_seq = str(myseq1.seq[int(Vinfo[8])-1:int(Vinfo[9])])
+					leader_seq = get_leader(str(myseq1.seq),Vinfo)
 					if len(cdr3)>0:
-						out.writerow([cdr3[1],cdr3[2],myid,";".join(recom),";".join(Vinfo[3:12]),";".join(Dinfo[3:12]),";".join(Jinfo[3:12]),variable_seq,V_seq])
+						out.writerow([cdr3[1],cdr3[2],myid,";".join(recom),";".join(Vinfo[3:12]),";".join(Dinfo[3:12]),";".join(Jinfo[3:12]),variable_seq,V_seq,leader_seq])
 					else:
-						out.writerow(["N/A","N/A",myid,";".join(recom),";".join(Vinfo[3:12]),";".join(Dinfo[3:12]),";".join(Jinfo[3:12]),variable_seq,V_seq])
+						out.writerow(["N/A","N/A",myid,";".join(recom),";".join(Vinfo[3:12]),";".join(Dinfo[3:12]),";".join(Jinfo[3:12]),variable_seq,V_seq,leader_seq])
 			myid,recom,cdr3,Vinfo,Dinfo,Jinfo = "",[],[],[],[],[]
 			myid = rec.strip().split(" ")[2]
 			vnum, dnum, jnum = 0,0,0
@@ -54,13 +73,14 @@ def main():
 	if len(Vinfo)>0 and len(Jinfo)>0:
 		variable_seq = str(myseq1.seq[int(Vinfo[8])-1:int(Jinfo[9])])
 		V_seq = str(myseq1.seq[int(Vinfo[8])-1:int(Vinfo[9])])
+		leader_seq = get_leader(str(myseq1.seq),Vinfo)
 		if len(cdr3)>0:
-			out.writerow([cdr3[1],cdr3[2],myid,";".join(recom),";".join(Vinfo[3:12]),";".join(Dinfo[3:12]),";".join(Jinfo[3:12]),variable_seq,V_seq])
+			out.writerow([cdr3[1],cdr3[2],myid,";".join(recom),";".join(Vinfo[3:12]),";".join(Dinfo[3:12]),";".join(Jinfo[3:12]),variable_seq,V_seq,leader_seq])
 		else:
-			out.writerow(["N/A","N/A",myid,";".join(recom),";".join(Vinfo[3:12]),";".join(Dinfo[3:12]),";".join(Jinfo[3:12]),variable_seq,V_seq])
+			out.writerow(["N/A","N/A",myid,";".join(recom),";".join(Vinfo[3:12]),";".join(Dinfo[3:12]),";".join(Jinfo[3:12]),variable_seq,V_seq,leader_seq])
 	
 if __name__=='__main__':
-	parser = argparse.ArgumentParser(prog='python ParseIgBLAST.py',usage='%(prog)s -f fasta -i igblast -o outname -d outdir',description = 'Parse IgBLAST result, and get CDR3_nt, CDR3_aa, ID, recombination_info, Vinfo, Dinfo, Jinfo, variable_seq, V_seq, etc',epilog = 'Created by WangCR. April 2, 2018')
+	parser = argparse.ArgumentParser(prog='python ParseIgBLAST.py',usage='%(prog)s -f fasta -i igblast -o outname -d outdir',description = 'Parse IgBLAST result, and get CDR3_nt, CDR3_aa, ID, recombination_info, Vinfo, Dinfo, Jinfo, variable_seq, V_seq, leader_seq_predict, etc',epilog = 'Created by WangCR. April 2, 2018')
 	parser.add_argument('-f','--fasta',help='Input fasta format file')
 	parser.add_argument('-i','--igblast',help='Input igblast m7 format result')
 	parser.add_argument('-d','--outdir',default=".",help='Output file director')

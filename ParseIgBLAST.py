@@ -28,6 +28,12 @@ def main():
 				recom = info
 			elif len(info)==7:
 				recom = [info[0],"N/A"]+info[1:]
+		elif rec.startswith("TR"):
+			info = rec.strip().split("\t")
+			if len(info)==8:
+				recom = info
+			elif len(info)==7:
+				recom = [info[0],"N/A"]+info[1:]
 		elif rec.startswith("CDR3\t"):
 			cdr3 = rec.strip().split("\t")
 		elif rec.startswith("V\t") and vnum==0:

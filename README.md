@@ -19,6 +19,12 @@ You can get it from [Standalone IgBLAST](ftp://ftp.ncbi.nih.gov/blast/executable
 
 Additionally, you should down the file ***edit_imgt_file.pl***, director ***internal_data, optional_file***.
 
+### 3.CD-HIT: 
+
+it is a very widely used program for clustering and comparing protein or nucleotide sequences.
+
+You can get it from [CD-HIT](https://github.com/weizhongli/cdhit/releases)
+
 
 ### 3.IMGT Germline sequence
 

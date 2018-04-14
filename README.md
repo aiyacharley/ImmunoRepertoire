@@ -26,7 +26,7 @@ it is a very widely used program for clustering and comparing protein or nucleot
 You can get it from [CD-HIT](https://github.com/weizhongli/cdhit/releases)
 
 
-### 3.IMGT Germline sequence
+### 4.IMGT Germline sequence
 
 This project, we get Immuno Germline sequence F+ORF+in-frame P sections from [IMGT](http://www.imgt.org/vquest/refseqh.html), and makes it standardized by **edit_imgt_file.pl**.
 

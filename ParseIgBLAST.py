@@ -71,8 +71,6 @@ def main():
 	if len(Vinfo)>0 and len(Jinfo)>0:
 		variable_seq = str(myseq1.seq[int(Vinfo[8])-1:int(Jinfo[9])])
 		V_seq = str(myseq1.seq[int(Vinfo[8])-1:int(Vinfo[9])])
-		variable_seq = str(myseq1.seq[int(Vinfo[8])-1:int(Jinfo[9])])
-		V_seq = str(myseq1.seq[int(Vinfo[8])-1:int(Vinfo[9])])
 		leader_seq = get_leader(str(myseq1.seq),Vinfo)
 		if len(cdr3)>0:
 			out.writerow([cdr3[1],cdr3[2],myid,";".join(recom),";".join(Vinfo[3:12]),";".join(Dinfo[3:12]),";".join(Jinfo[3:12]),variable_seq,V_seq,leader_seq])

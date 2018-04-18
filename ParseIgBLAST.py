@@ -68,9 +68,9 @@ def main():
 		elif rec.startswith("J\t") and jnum==0:
 			Jinfo = rec.strip().split("\t")
 			jnum = 1
-	variable_seq = str(myseq1.seq[int(Vinfo[8])-1:int(Jinfo[9])])
-	V_seq = str(myseq1.seq[int(Vinfo[8])-1:int(Vinfo[9])])
 	if len(Vinfo)>0 and len(Jinfo)>0:
+		variable_seq = str(myseq1.seq[int(Vinfo[8])-1:int(Jinfo[9])])
+		V_seq = str(myseq1.seq[int(Vinfo[8])-1:int(Vinfo[9])])
 		variable_seq = str(myseq1.seq[int(Vinfo[8])-1:int(Jinfo[9])])
 		V_seq = str(myseq1.seq[int(Vinfo[8])-1:int(Vinfo[9])])
 		leader_seq = get_leader(str(myseq1.seq),Vinfo)
